@@ -1,6 +1,6 @@
-// Require the module 
+// Require forecast module
 var Forecast = require('forecast');
- 
+
 // Initialize
 var forecast_key = ""; //insert key here
 var forecast = new Forecast({
@@ -29,7 +29,7 @@ function loadWeather(){
 			    var result = json.results[0];
 			    var city = result.address_components[2].short_name;
 			    var state = result.address_components[5].long_name;
-				document.getElementById("weatherHeader").innerHTML = "Displaying weather for " + city + ", " + state;
+				document.getElementById("weatherHeader").innerHTML = city + ", " + state;
 		 	}
 		});
 
@@ -37,12 +37,51 @@ function loadWeather(){
 		  	if(err) return console.dir(err);
 		  	document.getElementById("summary").innerHTML = "It is currently " + weather.currently.summary;
 		  	document.getElementById("temp").innerHTML = weather.currently.temperature + " degrees Fahrenheit";
-		  	document.getElementById("humidity").innerHTML = weather.currently.humidity + "% humidity";
+		  	document.getElementById("humidity").innerHTML = Math.floor(weather.currently.humidity * 100) + "% humidity";
 		});
 	}
 }
 
 loadWeather();
+
+window.onload = function() {
+	var cDiv = document.getElementById('currently');
+	var hDiv = document.getElementById('hourly');
+	var dDiv = document.getElementById('daily');
+
+	document.getElementById('c').onclick = function() {
+	    if (cDiv.style.display !== 'none') {
+	        cDiv.style.display = 'none';
+	    }
+	    else {
+	        cDiv.style.display = 'block';
+	        hDiv.style.display = 'none';
+	        dDiv.style.display = 'none';
+	    }
+	};
+
+	document.getElementById('h').onclick = function() {
+	    if (hDiv.style.display !== 'none') {
+	        hDiv.style.display = 'none';
+	    }
+	    else {
+	        hDiv.style.display = 'block';
+	        cDiv.style.display = 'none';
+	        dDiv.style.display = 'none';
+	    }
+	};
+
+	document.getElementById('d').onclick = function() {
+	    if (dDiv.style.display !== 'none') {
+	        dDiv.style.display = 'none';
+	    }
+	    else {
+	        dDiv.style.display = 'block';
+	        hDiv.style.display = 'none';
+	        cDiv.style.display = 'none';
+	    }
+	};
+}
 
 setInterval(function() {
 	loadWeather();

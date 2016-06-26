@@ -3,17 +3,34 @@
   <head>
     <meta charset="UTF-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="app.js"></script>
     <title>Today's Summary</title>
   </head>
   <body>
   	<div id="weatherHeader"></div>
-  	<div class="fields">
-	  	<div id="summary"></div>
-	  	<div id="temp"></div>
-	  	<div id="humidity"></div>
-	  	<div id="it"></div>
+  	<div class="listContainer">
+  		<!-- need to load this ul section dynamically so it only appears when the city appears -->
+  		<ul>
+  			<li id="c">Currently</li>
+  			<li id="h">Hourly</li>
+  			<li id="d">Daily</li>
+  		</ul>
+  	</div>
+  	<div id="currently">
+	  	<div class="fields" id="weather">
+		  	<div id="summary"></div>
+		  	<div id="temp"></div>
+		  	<div id="humidity"></div>
+		  	<div id="it"></div>
+	  	</div>
+  	</div>
+  	<div id="hourly">
+  		Hourly Test
+  	</div>
+  	<div id="daily">
+  		Daily Test
   	</div>
   </body>
 </html>

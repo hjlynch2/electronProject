@@ -2,8 +2,30 @@ const electron = require('electron');
 // Module to control application life.
 const {app} = electron;
 // Module to create native browser window.
-const {BrowserWindow} = electron;
+//const {BrowserWindow} = electron;
 
+//this is for if we want it to be a menu bar application
+var menubar = require('menubar');
+
+var mb = menubar({
+  width: 600
+});
+
+mb.on('ready', function ready () {
+
+});
+
+mb.on('after-create-window', function() {
+
+  //load the url
+  mb.window.loadURL(`file://${__dirname}/index.html`);
+
+  //open devtools
+  //mb.window.webContents.openDevTools();
+});
+
+
+/* This is for if we want it to be a desktop window
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
@@ -48,3 +70,4 @@ app.on('activate', () => {
     createWindow();
   }
 });
+*/
