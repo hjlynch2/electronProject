@@ -4,7 +4,7 @@
 }
 
 #currently {
-	display:none;
+	display:block;
 }
 
 #hourly {
@@ -15,6 +15,19 @@
 	display:none;
 }
 
+#h_list {
+	padding: 0;
+	list-style-type:none;
+}
+
+#h_list li {
+	display: inline;
+}
+
+.active {
+	color: #708090;
+}
+
 .fields {
 	font-size:18px;
 	color: #6B8E23;
@@ -23,16 +36,23 @@
 .listContainer {
 	font-size: 22px;
 	color:#556B2F;
-	left: -20px;
+}
+
+.time {
+
+}
+
+.smallField {
+	font-size: 14px
 }
 
 ul {
-	padding:0;
-	list-style-type:none
+	padding: 0;
+	list-style-type:none;
 }
 
 ul li {
-	padding: 10px;
+	padding-right: 10px;
 	display: inline;
 }
 
@@ -42,7 +62,6 @@ ul li:hover {
 
 body {
 	background-color: #C0C0C0;
-	text-align: center
 }
 
 * {

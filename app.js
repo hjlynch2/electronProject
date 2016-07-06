@@ -35,9 +35,37 @@ function loadWeather(){
 
 		forecast.get([lat, long], function(err, weather) {
 		  	if(err) return console.dir(err);
-		  	document.getElementById("summary").innerHTML = "It is currently " + weather.currently.summary;
-		  	document.getElementById("temp").innerHTML = weather.currently.temperature + " degrees Fahrenheit";
-		  	document.getElementById("humidity").innerHTML = Math.floor(weather.currently.humidity * 100) + "% humidity";
+
+		  	//current div
+		  	document.getElementById("c_summary").innerHTML = "It is currently " + weather.currently.summary;
+		  	document.getElementById("c_temp").innerHTML = weather.currently.temperature + " degrees Fahrenheit";
+		  	document.getElementById("c_humidity").innerHTML = Math.floor(weather.currently.humidity * 100) + "% humidity";
+
+		  	//hourly div
+		  	for(var hour_it = 0; hour_it < 12; hour_it++) { //display 12 hours
+		  		console.log(hour_it);
+		  		var hourInsert = "<li>";
+		  		hourData = weather.hourly.data[hour_it];
+
+		  		var hour = getHour(hourData.time);
+		  		hourInsert += "<div class=\"time\">" + hour +"</div>";
+
+		  		var actualTemp = hourData.temperature;
+		  		hourInsert += "<div class=\"smallField\">" + actualTemp +" degrees</div>";
+
+		  		var feelsLike = hourData.apparentTemperature;
+		  		hourInsert += "<div class=\"smallField\">Feels like " + feelsLike + " degrees</div>";
+
+		  		var rain = hourData.precipProbability;
+		  		hourInsert += "<div class=\"smallField\">" + ((rain * 100) | 0) + "% chance of rain</div>";
+
+		  		hourInsert += "</li>";
+		  		$(hourInsert).appendTo("#h_list");
+		  	}
+
+		  	//daily div
+		  	
+		  	console.log(weather);
 		});
 	}
 }
@@ -49,11 +77,15 @@ window.onload = function() {
 	var hDiv = document.getElementById('hourly');
 	var dDiv = document.getElementById('daily');
 
+	$("#c").addClass("active");
+
 	document.getElementById('c').onclick = function() {
+		$(".active").removeClass("active");
 	    if (cDiv.style.display !== 'none') {
 	        cDiv.style.display = 'none';
 	    }
 	    else {
+	    	$("#c").addClass("active");
 	        cDiv.style.display = 'block';
 	        hDiv.style.display = 'none';
 	        dDiv.style.display = 'none';
@@ -61,10 +93,12 @@ window.onload = function() {
 	};
 
 	document.getElementById('h').onclick = function() {
+		$(".active").removeClass("active");
 	    if (hDiv.style.display !== 'none') {
 	        hDiv.style.display = 'none';
 	    }
 	    else {
+	    	$("#h").addClass("active");
 	        hDiv.style.display = 'block';
 	        cDiv.style.display = 'none';
 	        dDiv.style.display = 'none';
@@ -72,10 +106,12 @@ window.onload = function() {
 	};
 
 	document.getElementById('d').onclick = function() {
+		$(".active").removeClass("active");
 	    if (dDiv.style.display !== 'none') {
 	        dDiv.style.display = 'none';
 	    }
 	    else {
+	    	$("#d").addClass("active");
 	        dDiv.style.display = 'block';
 	        hDiv.style.display = 'none';
 	        cDiv.style.display = 'none';
@@ -86,3 +122,13 @@ window.onload = function() {
 setInterval(function() {
 	loadWeather();
 }, 300000); //every 5 minutes it updates
+
+function getHour(timestamp) {
+	var date = new Date(timestamp*1000);
+	var hours = date.getHours();
+	var ampm  = hours >= 12 ? 'pm' : 'am';
+	hours = hours % 12;
+	hours = hours ? hours : 12;
+	var strHour = hours + ':00 ' +  ampm;
+	return strHour;
+}
