@@ -8,6 +8,7 @@ This is a project where I'm pretty much just messing around with electon.js to b
 4. Package for consumer usage
 
 ##Images
+(Blacked out my location for obvious reasons)
 ####Current Weather
 ![Alt text](img/currently.jpg "Current Weather")
 ####Hourly Weather
