@@ -6,3 +6,11 @@ This is a project where I'm pretty much just messing around with electon.js to b
 2. Add color customization functionality (maybe)
 3. Fix issues detailed for project
 4. Package for consumer usage
+
+##Images
+####Current Weather
+![Alt text](img/currently.jpg "Current Weather")
+####Hourly Weather
+![Alt text](img/hourly.jpg "Hourly Weather")
+####Daily Weather
+![Alt text](img/daily.jpg "Daily Weather")
