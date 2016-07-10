@@ -16,16 +16,26 @@
 }
 
 #h_list {
-	padding: 0;
 	list-style-type:none;
 }
 
-#h_list li {
-	display: inline;
+#d_list {
+	list-style-type:none;
+}
+
+#list_element {
+	float:left;
+	display: inline-block;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+
+#l_container {
+	display:block;
 }
 
 .active {
-	color: #708090;
+	color: #006400;
 }
 
 .fields {
@@ -38,12 +48,12 @@
 	color:#556B2F;
 }
 
-.time {
-
+.sum {
+	font-size: 16px;
 }
 
 .smallField {
-	font-size: 14px
+	font-size: 14px;
 }
 
 ul {

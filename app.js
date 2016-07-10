@@ -42,9 +42,9 @@ function loadWeather(){
 		  	document.getElementById("c_humidity").innerHTML = Math.floor(weather.currently.humidity * 100) + "% humidity";
 
 		  	//hourly div
+		  	var hourInsert = "";
 		  	for(var hour_it = 0; hour_it < 12; hour_it++) { //display 12 hours
-		  		console.log(hour_it);
-		  		var hourInsert = "<li>";
+		  		hourInsert += "<li id=\"list_element\"><div id=\"l_container\">";
 		  		hourData = weather.hourly.data[hour_it];
 
 		  		var hour = getHour(hourData.time);
@@ -59,11 +59,35 @@ function loadWeather(){
 		  		var rain = hourData.precipProbability;
 		  		hourInsert += "<div class=\"smallField\">" + ((rain * 100) | 0) + "% chance of rain</div>";
 
-		  		hourInsert += "</li>";
-		  		$(hourInsert).appendTo("#h_list");
+		  		hourInsert += "</div></li>";
 		  	}
+		  	$(hourInsert).appendTo("#h_list");
 
+		  	
 		  	//daily div
+		  	var dailyInsert = "";
+		  	for(var day_it = 0; day_it < 7; day_it++) { //display 7 days
+		  		dailyInsert += "<li id=\"list_element\"><div id=\"l_container\">";
+		  		dailyData = weather.daily.data[day_it];
+
+		  		var day = getDay(dailyData.time);
+		  		dailyInsert += "<div class=\"time\">" + day +"</div>";
+
+		  		var summary = dailyData.summary
+		  		dailyInsert += "<div class=\"sum\">" + summary +"</div>";
+
+		  		var minTemp = dailyData.temperatureMin;
+		  		dailyInsert += "<div class=\"smallField\">Min: " + minTemp +" degrees</div>";
+
+		  		var maxTemp = dailyData.temperatureMax;
+		  		dailyInsert += "<div class=\"smallField\">Max: " + maxTemp +" degrees</div>";
+
+		  		var rain = dailyData.precipProbability;
+		  		dailyInsert += "<div class=\"smallField\">" + ((rain * 100) | 0) + "% chance of rain</div>";
+
+		  		dailyInsert += "</div></li>";
+		  	}
+		  	$(dailyInsert).appendTo("#d_list");
 		  	
 		  	console.log(weather);
 		});
@@ -131,4 +155,32 @@ function getHour(timestamp) {
 	hours = hours ? hours : 12;
 	var strHour = hours + ':00 ' +  ampm;
 	return strHour;
+}
+
+
+function getDay(timestamp) {
+	var date = new Date(timestamp*1000);
+	var day = date.getDay();
+	return dayOfTheWeek(day);
+}
+
+function dayOfTheWeek(day) {
+	switch(day) {
+		case 0:
+			return "Sunday";
+		case 1:
+			return "Monday";
+		case 2:
+			return "Tuesday";
+		case 3:
+			return "Wednesday";
+		case 4:
+			return "Thursday";
+		case 5:
+			return "Friday";
+		case 6:
+			return "Saturday";
+		default:
+			return "Something went wrong";
+	}
 }
